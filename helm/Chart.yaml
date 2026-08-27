@@ -1,0 +1,11 @@
+apiVersion: v2
+name: graphai
+description: Helm chart for GraphAI Enterprise Workflow Orchestration (DAGs, Branching, Approvals, Retries)
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - dag-workflow
+  - orchestration
+  - approval-gate
+  - exponential-retry

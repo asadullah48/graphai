@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GraphAI | Enterprise DAG Workflow Orchestration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <!-- Ambient Safety Lights -->
+  <div class="glow-sphere glow-blue"></div>
+  <div class="glow-sphere glow-cyan"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="6" cy="6" r="3"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="12" r="3"/>
+            <path d="M8.5 7.5L15.5 10.5"/>
+            <path d="M8.5 16.5L15.5 13.5"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1>Graph<span class="gradient-text">AI</span></h1>
+          <span class="brand-badge" data-i18n="badgeTitle">DAG Workflow Engine</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="https://asadullahshafique-devunity.vercel.app" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none;">
+          <span>👨‍💻 DevUnity Portfolio</span>
+        </a>
+
+        <div class="live-status">
+          <span class="pulse-dot"></span>
+          <span id="gatewayStatus" data-i18n="statusLive">DAG Engine Active (:8010)</span>
+        </div>
+
+        <button id="langToggleBtn" class="btn btn-outline btn-sm" onclick="toggleLanguage()">
+          <span id="langLabel">العربية</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body -->
+  <main class="app-main">
+    <!-- Hero Header -->
+    <section class="hero-section">
+      <h2 data-i18n="heroTitle">Deterministic DAG Workflow Orchestration with Approvals & Fault Recovery</h2>
+      <p data-i18n="heroSubtitle">Coordinate multi-agent processes with strict topological dependencies, parallel fan-out evaluation, human-in-the-loop compliance gates, and self-healing exponential retries.</p>
+    </section>
+
+    <!-- Metrics Row -->
+    <section class="metrics-grid">
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric1Label">DAG Topological Integrity</span>
+        <div class="metric-value gradient-text">100.0%</div>
+        <span class="metric-sub" data-i18n="metric1Sub">Zero Race Conditions</span>
+      </div>
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric2Label">HITL Checkpoint Latency</span>
+        <div class="metric-value">Instantaneous</div>
+        <span class="metric-sub" data-i18n="metric2Sub">Safe State Suspension</span>
+      </div>
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric3Label">Transient Error Recovery</span>
+        <div class="metric-value">99.99%</div>
+        <span class="metric-sub" data-i18n="metric3Sub">Exponential Backoff & Jitter</span>
+      </div>
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric4Label">Parallel Task Speedup</span>
+        <div class="metric-value">2.4x Faster</div>
+        <span class="metric-sub" data-i18n="metric4Sub">Concurrent Node Dispatch</span>
+      </div>
+    </section>
+
+    <!-- Studio Section -->
+    <section class="studio-section">
+      <div class="section-header">
+        <div>
+          <h3 data-i18n="studioTitle">DAG Orchestration & Approval Studio</h3>
+          <p class="section-desc" data-i18n="studioDesc">Trigger commercial loan origination workflows, watch parallel evaluation branches, interact with compliance approval gates, and test automated retry recovery.</p>
+        </div>
+      </div>
+
+      <div class="studio-layout">
+        <!-- Input & Control Panel -->
+        <div class="panel glass">
+          <!-- Preset Scenarios -->
+          <div class="preset-box">
+            <span class="preset-label" data-i18n="lblPresets">Select Workflow Scenario:</span>
+            <div class="preset-buttons" id="scenarioButtons">
+              <!-- JS Rendered -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="lblApplicant">Commercial Applicant Entity</label>
+            <input type="text" id="applicantInput" class="input-control" value="Apex Holdings Ltd">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:1;">
+              <label data-i18n="lblLoanAmount">Requested Facility ($)</label>
+              <input type="number" id="amountInput" class="input-control" value="250000">
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label data-i18n="lblRiskScore">Risk Index (0.0 - 1.0)</label>
+              <input type="number" step="0.05" id="riskInput" class="input-control" value="0.42">
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+              <input type="checkbox" id="transientToggle" checked style="accent-color:var(--accent-blue);">
+              <span data-i18n="lblSimulateRetry">Simulate Transient 504 Timeout (Triggers RetryAgent)</span>
+            </label>
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="runWorkflowTask()" id="wfBtn">
+            <span data-i18n="btnExecuteWorkflow">⚡ Dispatch DAG Workflow</span>
+          </button>
+
+          <!-- Dynamic Approval Action Box -->
+          <div id="approvalBox" class="approval-action-box" style="display:none;">
+            <div class="approval-box-header">
+              <strong data-i18n="lblApprovalRequired">⚠️ Compliance Checkpoint Reached</strong>
+              <span class="badge badge-warning">PAUSED</span>
+            </div>
+            <p data-i18n="lblApprovalDesc" style="font-size:0.84rem; color:var(--text-muted);">Workflow paused for dual-custody authorization. Amount exceeds $100k policy ceiling.</p>
+            <div style="display:flex; gap:10px; margin-top:8px;">
+              <button class="btn btn-sm btn-success" onclick="submitApproval('APPROVE')" style="flex:1;">✅ Approve & Resume</button>
+              <button class="btn btn-sm btn-danger" onclick="submitApproval('REJECT')" style="flex:1;">❌ Reject</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Output & DAG Visualizer Panel -->
+        <div class="panel glass output-panel">
+          <div class="panel-header">
+            <span class="panel-title" data-i18n="titleDAGView">DAG Execution Topology</span>
+            <span id="wfStatusBadge" class="badge badge-success">IDLE</span>
+          </div>
+
+          <!-- DAG Flow Nodes Display -->
+          <div class="dag-container">
+            <div class="dag-node" id="node_NODE_1">
+              <span class="node-id">NODE_1</span>
+              <strong>Intake & Schema Validation</strong>
+              <span class="node-status-tag" id="status_NODE_1">PENDING</span>
+            </div>
+
+            <div class="dag-branch-row">
+              <div class="dag-node" id="node_NODE_2A">
+                <span class="node-id">NODE_2A</span>
+                <strong>Credit Analysis</strong>
+                <span class="node-status-tag" id="status_NODE_2A">PENDING</span>
+              </div>
+              <div class="dag-node" id="node_NODE_2B">
+                <span class="node-id">NODE_2B</span>
+                <strong>Fraud & AML Screen</strong>
+                <span class="node-status-tag" id="status_NODE_2B">PENDING</span>
+              </div>
+            </div>
+
+            <div class="dag-node" id="node_NODE_3">
+              <span class="node-id">NODE_3</span>
+              <strong>Compliance Approval Gate</strong>
+              <span class="node-status-tag" id="status_NODE_3">PENDING</span>
+            </div>
+
+            <div class="dag-node" id="node_NODE_4">
+              <span class="node-id">NODE_4</span>
+              <strong>Disbursement & Settlement</strong>
+              <span class="node-status-tag" id="status_NODE_4">PENDING</span>
+            </div>
+          </div>
+
+          <!-- Audit Trail Box -->
+          <div class="terminal-box">
+            <span class="terminal-header" data-i18n="lblAuditTrail">Workflow Execution Audit Ledger:</span>
+            <pre><code id="auditStream" class="code-block">Dispatch a workflow to observe DAG execution events...</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p style="margin-bottom:6px;"><a href="https://asadullahshafique-devunity.vercel.app" target="_blank" style="color:var(--accent-blue); text-decoration:none; font-weight:600;">← Back to Asadullah Shafique Portfolio (DevUnity)</a></p>
+    <p>© 2026 GraphAI • Enterprise Workflow Orchestration Layer • <a href="https://github.com/asadullah48/graphai" target="_blank">GitHub Repository</a></p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -8,6 +8,7 @@ from typing import List, Dict, Any
 from graphai.core.models import (
     WorkflowExecutionRequest, ApprovalActionRequest, WorkflowRunResult
 )
+from graphai.core.llm_client import OllamaClient, OLLAMA_MODEL
 from graphai.orchestration.graph_engine import GraphEngine
 
 app = FastAPI(
@@ -44,7 +45,12 @@ def healthz():
 
 @app.get("/readyz")
 def readyz():
-    return {"status": "ready", "graph_agents_active": 3}
+    return {
+        "status": "ready",
+        "graph_agents_active": 3,
+        "ollama_model": OLLAMA_MODEL,
+        "ollama_reachable": OllamaClient.is_configured(),
+    }
 
 @app.post("/api/v1/workflow/execute", response_model=WorkflowRunResult)
 def execute_workflow(req: WorkflowExecutionRequest):

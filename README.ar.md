@@ -2,6 +2,9 @@
 
 > **تطبيق مرجعي بلغة Python وإطار FastAPI لتنسيق الوكلاء عبر مخططات موجهة غير دائرية (DAG): جدولة طوبولوجية، تنفيذ متوازي، بوابات موافقة بشرية (HITL)، إعادة محاولة بتراجع أسي، وعقدة اختيارية لنموذج لغوي محلي (Ollama).**
 
+**🔗 العرض المباشر**: [graphai-pi.vercel.app](https://graphai-pi.vercel.app)
+**📚 توثيق الواجهة البرمجية**: [graphai-pi.vercel.app/docs](https://graphai-pi.vercel.app/docs)
+
 ---
 
 ## ما هو هذا المشروع؟

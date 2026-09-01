@@ -8,8 +8,8 @@
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-teal.svg)](https://fastapi.tiangolo.com/)
 [![Author](https://img.shields.io/badge/Author-Asadullah%20Shafique-purple.svg)](https://asadullahshafique-devunity.vercel.app)
 
-**🔗 Live Demo:** not yet deployed — see [Deployment](#deployment) below to ship it to Vercel in one command.
-**📚 API Docs:** once deployed, append `/docs` to the demo URL for interactive Swagger/OpenAPI docs.
+**🔗 Live Demo:** [graphai-pi.vercel.app](https://graphai-pi.vercel.app)
+**📚 API Docs:** [graphai-pi.vercel.app/docs](https://graphai-pi.vercel.app/docs) (interactive Swagger/OpenAPI)
 
 ---
 
@@ -101,14 +101,14 @@ docker compose up --build
 
 ## Deployment
 
-The repo is pre-configured to deploy to [Vercel](https://vercel.com) as a Python serverless function (`api/index.py` → `vercel.json` rewrites, `.vercelignore` keeps the bundle lean). To ship it:
+The live demo above runs on [Vercel](https://vercel.com) as a Python serverless function (`api/index.py`, auto-detected as a FastAPI app; `.vercelignore` keeps the bundle lean). To redeploy your own copy:
 
 ```powershell
 npm i -g vercel   # one-time
 vercel --prod
 ```
 
-Ollama has no hosted free-tier endpoint, so on Vercel the credit-analysis node runs in its simulated fallback mode automatically — the same code path is exercised end-to-end by `tests/test_llm_client.py` and `tests/test_workflow_agent.py`. `Dockerfile` / `docker-compose.yml` / `helm/` are provided for a self-hosted deployment where a sidecar Ollama instance is reachable, giving the real LLM narrative in production too.
+Ollama has no hosted free-tier endpoint, so on Vercel the credit-analysis node runs in its simulated fallback mode automatically (confirmed live via `GET /readyz` → `"ollama_reachable": false`) — the same fallback path is exercised end-to-end by `tests/test_llm_client.py` and `tests/test_workflow_agent.py`. `Dockerfile` / `docker-compose.yml` / `helm/` are provided for a self-hosted deployment where a sidecar Ollama instance is reachable, giving the real LLM narrative in production too.
 
 ---
 

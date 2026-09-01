@@ -24,6 +24,12 @@ dev = [
     "pytest-asyncio>=0.23.0"
 ]
 
+[tool.setuptools.packages.find]
+# api/ is the Vercel serverless entrypoint, not part of the installable
+# distribution - without this, setuptools sees two top-level packages
+# (api, graphai) in this flat layout and refuses to guess which to build.
+include = ["graphai*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]

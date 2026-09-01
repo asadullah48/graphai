@@ -8,8 +8,8 @@
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-teal.svg)](https://fastapi.tiangolo.com/)
 [![Author](https://img.shields.io/badge/Author-Asadullah%20Shafique-purple.svg)](https://asadullahshafique-devunity.vercel.app)
 
-**🔗 Live Demo:** _deploying — link added once the Vercel build is verified (see below)_
-**📚 API Docs:** append `/docs` to the demo URL for interactive Swagger/OpenAPI docs.
+**🔗 Live Demo:** not yet deployed — see [Deployment](#deployment) below to ship it to Vercel in one command.
+**📚 API Docs:** once deployed, append `/docs` to the demo URL for interactive Swagger/OpenAPI docs.
 
 ---
 
@@ -101,7 +101,14 @@ docker compose up --build
 
 ## Deployment
 
-The API is deployed to [Vercel](https://vercel.com) as a Python serverless function (`api/index.py` → `vercel.json` rewrites). Ollama has no hosted free-tier endpoint, so the hosted demo runs the credit-analysis node in its simulated fallback mode — the same code path is exercised end-to-end by `tests/test_llm_client.py` and `tests/test_workflow_agent.py`. `Dockerfile` / `docker-compose.yml` / `helm/` are provided for a self-hosted deployment where a sidecar Ollama instance is reachable.
+The repo is pre-configured to deploy to [Vercel](https://vercel.com) as a Python serverless function (`api/index.py` → `vercel.json` rewrites, `.vercelignore` keeps the bundle lean). To ship it:
+
+```powershell
+npm i -g vercel   # one-time
+vercel --prod
+```
+
+Ollama has no hosted free-tier endpoint, so on Vercel the credit-analysis node runs in its simulated fallback mode automatically — the same code path is exercised end-to-end by `tests/test_llm_client.py` and `tests/test_workflow_agent.py`. `Dockerfile` / `docker-compose.yml` / `helm/` are provided for a self-hosted deployment where a sidecar Ollama instance is reachable, giving the real LLM narrative in production too.
 
 ---
 
